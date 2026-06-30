@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>J.A.R.V.I.S.</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="hud">
+
+        <!-- top bar -->
+        <div class="hud-topbar">
+            <span class="hud-id">J.A.R.V.I.S. // CORE INTERFACE</span>
+            <span class="hud-id hud-clock" id="clock">--:--:--</span>
+        </div>
+
+        <div class="hud-grid">
+
+            <!-- LEFT PANELS -->
+            <div class="hud-col hud-col-left">
+                <div class="panel panel-globe">
+                    <div class="panel-label">GLOBAL UPLINK</div>
+                    <div class="globe"></div>
+                </div>
+                <div class="panel panel-list">
+                    <div class="row"><span>MEM.SYS</span><span class="ok">ACTIVE</span></div>
+                    <div class="row"><span>UPLINK</span><span class="ok">STABLE</span></div>
+                    <div class="row"><span>SEC.NET</span><span class="ok">SECURE</span></div>
+                </div>
+                <div class="panel panel-bars">
+                    <div class="bar" style="--h:40%"></div>
+                    <div class="bar" style="--h:70%"></div>
+                    <div class="bar" style="--h:55%"></div>
+                    <div class="bar" style="--h:90%"></div>
+                    <div class="bar" style="--h:35%"></div>
+                    <div class="bar" style="--h:65%"></div>
+                </div>
+            </div>
+
+            <!-- CENTER: the actual chat, dressed as the reactor core -->
+            <div class="hud-col hud-col-center">
+                <div class="reactor-frame">
+                    <div class="reactor-ring r1"></div>
+                    <div class="reactor-ring r2"></div>
+                    <div class="reactor-ring r3"></div>
+                    <div class="reactor-ticks"></div>
+
+                    <div class="chat-container">
+                        <div class="scanline"></div>
+
+                        <div class="chat-header">
+                            <div class="header-text">
+                                <h1>JARVIS</h1>
+                                <div class="header-status"><span class="dot"></span> SYSTEM ONLINE</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-messages" id="chat-box"></div>
+
+                        <form id="chat-form" onsubmit="event.preventDefault(); fetchData();">
+                            <input
+                                type="text"
+                                id="user-input"
+                                placeholder="Speak, sir..."
+                                required
+                                autocomplete="off">
+                            <button type="button" onclick="fetchData()">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANELS -->
+            <div class="hud-col hud-col-right">
+                <div class="panel panel-mesh">
+                    <div class="panel-label">SPATIAL MAP</div>
+                    <div class="mesh"></div>
+                </div>
+                <div class="panel panel-text">
+                    <div class="panel-label">LOG</div>
+                    <div class="fake-lines">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="panel panel-radar">
+                    <div class="radar"><div class="radar-sweep"></div></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="hud-bottombar">
+            <span class="hud-id">POWERED BY STARK INDUSTRIES</span>
+            <span class="hud-id">REV 4.6</span>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
