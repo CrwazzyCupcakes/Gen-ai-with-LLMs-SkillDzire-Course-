@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Chat-Bot</title>
+        <link rel="stylesheet" href="/static/style.css">
+        </head>
+            <body>
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h1>Chat-Bot</h1>
+                    </div>
+                    <div class="chat-messages" id="chat-box"></div>
+                    <form id="chat-form" onsubmit="event.preventDefault(); fetchData();">
+                        <input 
+                            type="text" 
+                            id="user-input" 
+                            placeholder="Type your message..."
+                            required>
+                        <button type="button" onclick="fetchData()">
+                        Send
+                        </button>
+                    </form>
+                </div>
+                <script src="/static/script.js"></script>
+            </body>
+</html>
