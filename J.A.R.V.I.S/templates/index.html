@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.A.R.V.I.S.</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
@@ -11,35 +12,39 @@
         <!-- top bar -->
         <div class="hud-topbar">
             <span class="hud-id">J.A.R.V.I.S. // CORE INTERFACE</span>
-            <span class="hud-id hud-clock" id="clock">--:--:--</span>
+            <span class="hud-id" id="location-readout">LOCATING...</span>
+            <span class="hud-id hud-clock" id="clock">--:--:-- · ----</span>
         </div>
 
         <div class="hud-grid">
 
             <!-- LEFT PANELS -->
             <div class="hud-col hud-col-left">
-                <div class="panel panel-globe">
+                <div class="panel panel-globe" id="panel-globe" title="Click to re-acquire location">
                     <div class="panel-label">GLOBAL UPLINK</div>
                     <div class="globe"></div>
+                    <div class="globe-caption" id="globe-caption">acquiring signal</div>
                 </div>
                 <div class="panel panel-list">
-                    <div class="row"><span>MEM.SYS</span><span class="ok">ACTIVE</span></div>
-                    <div class="row"><span>UPLINK</span><span class="ok">STABLE</span></div>
-                    <div class="row"><span>SEC.NET</span><span class="ok">SECURE</span></div>
+                    <div class="panel-label">SYSTEM STATUS</div>
+                    <div class="row"><span>UPLINK</span><span class="ok" id="status-uplink">CHECKING</span></div>
+                    <div class="row"><span>SEC.NET</span><span class="ok" id="status-secnet">CHECKING</span></div>
+                    <div class="row"><span>MEM.SYS</span><span class="ok" id="status-memsys">CHECKING</span></div>
+                    <div class="row"><span>VOICE</span><span class="ok" id="status-voice">STANDBY</span></div>
                 </div>
-                <div class="panel panel-bars">
-                    <div class="bar" style="--h:40%"></div>
-                    <div class="bar" style="--h:70%"></div>
-                    <div class="bar" style="--h:55%"></div>
-                    <div class="bar" style="--h:90%"></div>
-                    <div class="bar" style="--h:35%"></div>
-                    <div class="bar" style="--h:65%"></div>
+                <div class="panel panel-bars" id="panel-bars" title="Live microphone input level">
+                    <div class="bar" style="--h:8%"></div>
+                    <div class="bar" style="--h:8%"></div>
+                    <div class="bar" style="--h:8%"></div>
+                    <div class="bar" style="--h:8%"></div>
+                    <div class="bar" style="--h:8%"></div>
+                    <div class="bar" style="--h:8%"></div>
                 </div>
             </div>
 
             <!-- CENTER: the actual chat, dressed as the reactor core -->
             <div class="hud-col hud-col-center">
-                <div class="reactor-frame">
+                <div class="reactor-frame" id="reactor-frame">
                     <div class="reactor-ring r1"></div>
                     <div class="reactor-ring r2"></div>
                     <div class="reactor-ring r3"></div>
@@ -50,14 +55,17 @@
 
                         <div class="chat-header">
                             <div class="header-text">
-                                <h1>JARVIS</h1>
-                                <div class="header-status"><span class="dot"></span> SYSTEM ONLINE</div>
+                                <h1>J.A.R.V.I.S</h1>
+                                <div class="header-status"><span class="dot"></span> <span id="header-status-text">SYSTEM ONLINE</span></div>
                             </div>
                         </div>
 
                         <div class="chat-messages" id="chat-box"></div>
 
                         <form id="chat-form" onsubmit="event.preventDefault(); fetchData();">
+                            <button type="button" id="mic-btn" class="mic-btn" title="Click: arm / manual listen. Double-click: turn off voice.">
+                                <span class="mic-icon"></span>
+                            </button>
                             <input
                                 type="text"
                                 id="user-input"
@@ -72,18 +80,21 @@
 
             <!-- RIGHT PANELS -->
             <div class="hud-col hud-col-right">
-                <div class="panel panel-mesh">
-                    <div class="panel-label">SPATIAL MAP</div>
-                    <div class="mesh"></div>
+                <div class="panel panel-weather" id="panel-weather">
+                    <div class="panel-label">WEATHER</div>
+                    <div class="weather-body">
+                        <span class="weather-temp" id="weather-temp">--°</span>
+                        <span class="weather-desc" id="weather-desc">syncing</span>
+                    </div>
                 </div>
                 <div class="panel panel-text">
                     <div class="panel-label">LOG</div>
-                    <div class="fake-lines">
+                    <div class="fake-lines" id="log-lines">
                         <span></span><span></span><span></span>
                         <span></span><span></span><span></span>
                     </div>
                 </div>
-                <div class="panel panel-radar">
+                <div class="panel panel-radar" id="panel-radar" title="Click to ping current location">
                     <div class="radar"><div class="radar-sweep"></div></div>
                 </div>
             </div>
@@ -92,7 +103,8 @@
 
         <div class="hud-bottombar">
             <span class="hud-id">POWERED BY STARK INDUSTRIES</span>
-            <span class="hud-id">REV 4.6</span>
+            <span class="hud-id" id="voice-mode-readout">VOICE: INIT</span>
+            <span class="hud-id">REV 4.7</span>
         </div>
     </div>
 
